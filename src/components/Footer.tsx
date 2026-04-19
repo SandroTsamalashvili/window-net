@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
+import { services } from "@/lib/services";
 
 export default function Footer() {
   return (
@@ -22,10 +23,16 @@ export default function Footer() {
               Services
             </h4>
             <ul className="mt-4 space-y-2 text-sm text-muted">
-              <li><a className="hover:text-accent" href="#services">Insect Nets</a></li>
-              <li><a className="hover:text-accent" href="#services">Air Conditioning</a></li>
-              <li><a className="hover:text-accent" href="#services">Gas Boilers</a></li>
-              <li><a className="hover:text-accent" href="#services">Ventilation</a></li>
+              {services.map((s) => (
+                <li key={s.slug}>
+                  <Link
+                    href={`/services/${s.slug}`}
+                    className="hover:text-accent"
+                  >
+                    {s.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -34,9 +41,16 @@ export default function Footer() {
               Company
             </h4>
             <ul className="mt-4 space-y-2 text-sm text-muted">
-              <li><a className="hover:text-accent" href="#about">About</a></li>
-              <li><a className="hover:text-accent" href="#services">Catalog</a></li>
-              <li><a className="hover:text-accent" href="#contact">Contact</a></li>
+              <li>
+                <Link href="/#about" className="hover:text-accent">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/#contact" className="hover:text-accent">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -55,8 +69,12 @@ export default function Footer() {
         <div className="mt-12 flex flex-col gap-3 border-t border-border/70 pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} GLC. All rights reserved.</span>
           <div className="flex gap-5">
-            <Link href="#" className="hover:text-accent">Privacy</Link>
-            <Link href="#" className="hover:text-accent">Terms</Link>
+            <Link href="#" className="hover:text-accent">
+              Privacy
+            </Link>
+            <Link href="#" className="hover:text-accent">
+              Terms
+            </Link>
           </div>
         </div>
       </div>
